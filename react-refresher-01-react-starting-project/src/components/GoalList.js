@@ -1,16 +1,18 @@
 import React from 'react';
 import './GoalList.css';
 
-const GoalList = () => {
-    // return () is for proper syntax Javascript
-    return (
-        <ul className="goal-list">
-        <li>Finish the Course</li>
-        <li>Learn all about the Course Main Topic</li>
-        <li>Help other students in the Course Q&amp;A</li>
-      </ul>
-    );
+const GoalList = props => {
+  // Dev tools on web, you could see the data
+  console.log(props.goals);
 
+  // return () is for proper syntax Javascript
+  return (
+      <ul className="goal-list">
+        {props.goals.map(goal => {
+          return <li key={goal.id}>{goal.text}</li>;
+        })}
+      </ul>
+  );
 };
 
 export default GoalList
