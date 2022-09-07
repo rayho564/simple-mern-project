@@ -19,7 +19,9 @@ import React from 'react';
 // Injects the App.css style into this file
 import './App.css'
 // Injects the GoalList component to be allowed to be used below
-import GoalList from './components/GoalList';
+import GoalList from './components/GoalList/GoalList';
+import NewGoal from './components/NewGoal/NewGoal';
+
 
 const App = () => {
   const courseGoals = [
@@ -30,6 +32,7 @@ const App = () => {
 
   return <div className="course-goals">
     <h2> Course Goals</h2>
+    <NewGoal />
     <GoalList goals={courseGoals}/>
   </div>
 }
