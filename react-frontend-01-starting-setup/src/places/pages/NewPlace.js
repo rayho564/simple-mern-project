@@ -21,7 +21,7 @@ const formReducer = (state, action) => {
       }
       return {
         ...state,
-        input: {
+        inputs: {
           ...state.inputs,
           [action.inputId]: { value: action.value, isValid: action.isValid },
         },
@@ -34,7 +34,7 @@ const formReducer = (state, action) => {
 
 const NewPlace = () => {
   const [formState, dispatch] = useReducer(formReducer, {
-    input: {
+    inputs: {
       title: {
         value: "",
         isValid: false,
