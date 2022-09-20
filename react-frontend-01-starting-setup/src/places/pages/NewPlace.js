@@ -4,12 +4,12 @@ import Input from "../../shared/components/FormElements/Input";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
-} from "../../shared/components/util/validators";
+} from "../../shared/util/validators";
 import "./NewPlace.css";
 import Button from "../../shared/components/FormElements/Button";
 
 const formReducer = (state, action) => {
-  switch (action.Type) {
+  switch (action.type) {
     case "INPUT_CHANGE":
       let formIsValid = true;
       for (const inputId in state.inputs) {
@@ -34,7 +34,7 @@ const formReducer = (state, action) => {
 
 const NewPlace = () => {
   const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+    input: {
       title: {
         value: "",
         isValid: false,
