@@ -26,9 +26,9 @@ const Input = (props) => {
   // you can manage more complex state with ease by writing logic that will run instead
   // of just setting a value
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.value || "",
-    isValid: false,
-    isTouched: props.valid || false,
+    value: props.initialValue || "",
+    isTouched: false,
+    isValid: props.initialValid || false,
   });
 
   const {id, onInput} = props;
