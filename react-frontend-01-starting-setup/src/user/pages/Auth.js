@@ -35,7 +35,7 @@ const Auth = (props) => {
     if (!isLoginMode) {
       setFormData(
         {
-          ...formState.Inputs,
+          ...formState.inputs,
           name: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
@@ -43,7 +43,7 @@ const Auth = (props) => {
     } else {
       setFormData(
         {
-          ...formState.Inputs,
+          ...formState.inputs,
           name: {
             value: "",
             isValid: false,
