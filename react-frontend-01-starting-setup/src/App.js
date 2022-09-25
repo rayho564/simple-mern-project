@@ -6,6 +6,7 @@ import NewPlace from './places/pages/NewPlace'
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
+import Auth from './user/pages/Auth';
 
 // This all a single HTML page, but with react routing it re-renders based on the path
 const App = () => {
@@ -31,6 +32,9 @@ const App = () => {
           {/* order Matters for the :placedId vs above */}
           <Route path="/places/:placeId" exact>
             <UpdatePlace />
+          </Route>
+          <Route path="/auth" exact>
+            <Auth />
           </Route>
           <Redirect to="/" />
         </Switch>

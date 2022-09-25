@@ -9,6 +9,7 @@ import {
 } from '../../shared/util/validators';
 import useForm from '../../shared/hooks/form-hook';
 import './PlaceForm.css';
+import Card from '../../shared/components/UIElements/Card';
 
 const DUMMY_PLACES = [
   {
@@ -26,7 +27,7 @@ const DUMMY_PLACES = [
   },
   {
     id: "p2",
-    title: "Empire State Building",
+    title: "Empire State Building 2",
     description: "One of the most famous sky scrapers in the world",
     imageUrl:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Empire_State_Building_%28aerial_view%29.jpg/250px-Empire_State_Building_%28aerial_view%29.jpg",
@@ -60,19 +61,22 @@ const UpdatePlace = () => {
   const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
 
   useEffect(() => {
-    setFormData(
-      {
-        title: {
-          value: identifiedPlace.title,
-          isValid: true
+    if (identifiedPlace) {
+      setFormData(
+        {
+          title: {
+            value: identifiedPlace.title,
+            isValid: true
+          },
+          description: {
+            value: identifiedPlace.description,
+            isValid: true
+          }
         },
-        description: {
-          value: identifiedPlace.description,
-          isValid: true
-        }
-      },
-      true
-    );
+        true
+      );
+    }
+
     setIsLoading(false);
   }, [setFormData, identifiedPlace]);
 
@@ -84,7 +88,9 @@ const UpdatePlace = () => {
   if (!identifiedPlace) {
     return (
       <div className="center">
-        <h2>Could not find place!</h2>
+        <Card>
+          <h2>Could not find place!</h2>
+        </Card>
       </div>
     );
   }
