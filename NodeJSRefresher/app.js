@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   req.on("end", () => {
     const userName = body.split("=")[1];
     if (userName) {
-      res.body = { name: userName };
+      req.body = { name: userName };
     }
     next();
   });
