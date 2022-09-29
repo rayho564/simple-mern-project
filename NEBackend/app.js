@@ -5,6 +5,8 @@ const placesRoutes = require('./routes/places-routes');
 
 const app = express();
 
+app.use(bodyParser.json());
+
 app.use("/api/places", placesRoutes); // => /api/places... then placeRoutes adds /
 
 // With 4 params is a middleware call for errors

@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "f88da26b-6c47-48b0-9760-4b11eff3ab18",
+		"name": "MernFunctions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3875028"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n\t\"title\" : \"New York Stock Exchange\",\r\n\t\"description\" : \"Stonks\",\r\n    \"coordinates\" : {\r\n        \"lat\": 40.7068798,\r\n        \"lng\": -74.0134535\r\n    },\r\n    \"address\" : \"20 Broad St, New York, NY 10005\",\r\n    \"creator\" : \"u3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/places",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"places"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
