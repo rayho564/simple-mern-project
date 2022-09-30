@@ -1,4 +1,5 @@
 const { v4: uuid } = require("uuid"); // V4 includes a timestamp
+const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
 
@@ -52,6 +53,12 @@ const getPlacesByUserId = (req, res, next) => {
 };
 
 const createPlace = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    console.log(errors);
+    throw new HttpError("Invalid inputs passed, please check your data.", 422);
+  }
+
   const { title, description, coordinates, address, creator } = req.body;
   //This is temp until we do mongoDB
   // const title = req.body.title;
