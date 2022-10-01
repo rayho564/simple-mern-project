@@ -1,31 +1,67 @@
-const MongoClient = require("mongodb").MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 
-// Adding in a node between / and ?
-const url = "mongodb+srv://sa:pQRoscg3ZShNNX6C@cluster0.xepeola.mongodb.net/?retryWrites=true&w=majority";
+const url = "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/?retryWrites=true&w=majority";
+
+
+//const { MongoClient, ServerApiVersion } = require("mongodb");
+
+//const uri = "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/?retryWrites=true&w=majority";
 
 const createProduct = async (req, res, next) => {
-    const newProduct = {
-        name: req.body.name,
-        price: req.body.price
-    };
+  const newProduct = {
+    name: req.body.name,
+    price: req.body.price,
+  };
 
-    const client = new MongoClient(url);
+  const client = new MongoClient(url);
 
-    try {
-        await client.connect();
-        const db = client.db("test");
-        const result = db.collection("products").insertOne(newProduct);
-    } catch (error) {
-        return res.json({message: error});
-    }
+  try {
+      await client.connect();
+      const db = client.db();
+      const result = await db.collection("products").insertOne(newProduct);
+  } catch (error) {
+      return res.json({message: error});
+  }
 
-    client.close();
+  client.close();
 
-    res.json(newProduct);
+//   const client = new MongoClient(uri, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverApi: ServerApiVersion.v1,
+//   });
+//   try {
+//     client.connect((err) => {
+//       const collection = client.db("test").collection("devices");
+//       const result = collection.insertOne(newProduct);
+//       res.json(result);
+      
+//     });
+//   } catch (error) {
+//     return res.json({ message: error });
+//   }
+//   client.close();
+
+  res.json(newProduct);
 };
 
 const getProducts = async (req, res, next) => {
+    const client = new MongoClient(url);
 
+    let products;
+
+    try {
+        await client.connect();
+        const db = client.db();
+        // find gets a cursor and you'll iterate through it
+        products = await db.collection("products").find().toArray();
+    } catch (error) {
+        return res.json({message: "Could not retrieve product"}, error);
+    }
+  
+    client.close();
+
+    res.json(products);
 };
 
 exports.createProduct = createProduct;
