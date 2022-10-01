@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Product = require("./models/products");
+const Product = require("./models/product");
 
 mongoose
   .connect(
@@ -13,7 +13,7 @@ mongoose
     console.log("Connection failed!");
   });
 
-const createProduct = async (res, req, next) => {
+const createProduct = async (req, res, next) => {
   const createdProduct = new Product({
     name: req.body.name,
     price: req.body.price,
@@ -21,9 +21,9 @@ const createProduct = async (res, req, next) => {
 
   // Save does the heavy lifting for insert one and goes to the right db and collection
   // Path is given from Product model export
-  const result = await createProduct.save();
+  const result = await createdProduct.save();
 
   res.json(result);
 };
 
-exports.createdProduct = createProduct;
+exports.createProduct = createProduct;
