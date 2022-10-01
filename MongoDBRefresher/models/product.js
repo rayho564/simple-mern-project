@@ -5,4 +5,5 @@ const productSchema = new mongoose.Schema({
     price: { type: Number, required: true},
 });
 
+// Path is the "name"
 module.exports = mongoose.model("Product", productSchema);
