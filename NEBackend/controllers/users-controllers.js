@@ -1,17 +1,17 @@
-const { v4: uuid } = require("uuid"); // V4 includes a timestamp
+//const { v4: uuid } = require("uuid"); // V4 includes a timestamp
 const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
 const User = require("../models/user");
 
-let DUMMY_USERS = [
-  {
-    id: "u1",
-    name: "This Name",
-    email: "text@test.com",
-    password: "testers",
-  },
-];
+// let DUMMY_USERS = [
+//   {
+//     id: "u1",
+//     name: "This Name",
+//     email: "text@test.com",
+//     password: "testers",
+//   },
+// ];
 
 const getUsers = async (req, res, next) => {
   let users;
@@ -42,7 +42,7 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
 
@@ -72,8 +72,7 @@ const signup = async (req, res, next) => {
     password,
     image:
       "https://media.istockphoto.com/photos/new-york-city-skyline-picture-id486334510?k=20&m=486334510&s=612x612&w=0&h=OsShL4aTYo7udJodSNXoU_3anIdIG57WyIGuwW2_tvA=",
-    // currently a dummy
-    places,
+    places: []
   });
 
   try {

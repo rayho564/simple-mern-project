@@ -9,10 +9,11 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, minlength: 6 },
   image: { type: String, required: true },
-  // Later we'll store places Id
-  places: { type: String, required: true}
+  // Adding [] around the object will tell mongoose it can have multiple values
+  places: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Place'}]
 });
 
+// Error is very technical. So replace it when using user
 userSchema.plugin(uniqueValidator);
 
 // Adds a collection of the "User" lowercase with an s

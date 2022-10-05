@@ -13,7 +13,8 @@ const placeSchema = new Schema({
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },
   },
-  creator: { type: String, required: true }
+  // ref conencts the current schema to the user scehma
+  creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
 
 // Adds a collection of the "name" lowercase with an s
