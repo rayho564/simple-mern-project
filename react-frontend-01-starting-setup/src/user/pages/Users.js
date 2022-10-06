@@ -1,20 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import UsersList from "../components/UsersList";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
-const Users = () => {
-  // Current a dummy data until we use real data
-  const USERS = [
-    {
-      id: "u1",
-      name: "Raymond Ho",
-      image:
-        "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864%2C0%2C1728%2C2304&wid=600&hei=800&scl=2.88",
-      places: 3,
-    },
-  ];
+const Users = async () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
+  const [loadedUsers, setLoadedUsers] = useState();
 
-  return <UsersList items={USERS} />;
+  // run code only when data changes
+  // don't turn useEffect to async because it goes against what it expects which is not a promise
+  useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+
+      try {
+        // fetch default is Get so need to add
+        // don't need to attach body or content type because we're not sending anything
+        const response = await fetch("http://localhost:5000/api/users");
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+
+        setLoadedUsers(responseData.users);
+      } catch (err) {
+        setError(err.message);
+      }
+      setIsLoading(false);
+    };
+
+    sendRequest();
+  }, []);
+
+  const errorHandler = () => {
+    setError(null);
+  };
+
+  return (
+    <React.Fragment>
+      <ErrorModal error={error} onClear={errorHandler} />
+      {isLoading && (
+        <div className="center">
+          <LoadingSpinner />
+        </div>
+      )}
+      {!isLoading && loadedUsers && <UsersList items={loadedUsers} />}
+    </React.Fragment>
+  );
 };
 
 export default Users;

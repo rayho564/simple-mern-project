@@ -10,6 +10,17 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  // where should the browser allows this, * opens to all domains
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
+  next();
+});
+
 app.use("/api/places", placesRoutes); // => /api/places... then placeRoutes adds /
 app.use("/api/users", usersRoutes);
 
@@ -30,10 +41,10 @@ app.use((error, req, res, next) => {
   });
 });
 
-// We're going to default the db to places which is inbetween the / and ?
+// We're going to default the db to mern which is inbetween the / and ?
 mongoose
   .connect(
-    "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/places?retryWrites=true&w=majority"
+    "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/mern?retryWrites=true&w=majority"
   )
   .then(() => {
     app.listen(5000);

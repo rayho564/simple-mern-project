@@ -13,7 +13,7 @@ const placeSchema = new Schema({
     lat: { type: Number, required: true },
     lng: { type: Number, required: true },
   },
-  // ref conencts the current schema to the user scehma
+  // ref conencts the current schema to the another schema
   creator: { type: mongoose.Types.ObjectId, required: true, ref: 'User'}
 });
 
