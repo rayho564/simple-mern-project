@@ -36,7 +36,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 // ];
 
 const UserPlaces = (props) => {
-  const { loadedPlaces, setLoadedPlaces } = useState();
+  const [ loadedPlaces, setLoadedPlaces ] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   // useParams takes advantage of the dynamic segments set by /: in Route
@@ -62,7 +62,7 @@ const UserPlaces = (props) => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       {isLoading && (
-        <div className="Center">
+        <div className="center">
           <LoadingSpinner />
         </div>
       )}
