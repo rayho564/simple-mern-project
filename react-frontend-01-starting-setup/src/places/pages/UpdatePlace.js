@@ -45,11 +45,11 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 // ];
 
 const UpdatePlace = () => {
+  const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [loadedPlace, setLoadedPlace] = useState();
   const placeId = useParams().placeId;
   const history = useHistory();
-  const auth = useContext(AuthContext);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -90,7 +90,7 @@ const UpdatePlace = () => {
       } catch (err) {}
     };
     fetchPlace();
-  }, [placeId, sendRequest, setFormData]);
+  }, [setFormData, placeId, sendRequest]);
 
   // useEffect(() => {
   //   if (identifiedPlace) {
@@ -117,13 +117,13 @@ const UpdatePlace = () => {
     try {
       await sendRequest(
         `http://localhost:5000/api/places/${placeId}`,
-        "PATCH",
+        'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,
           description: formState.inputs.description.value
         }),
         {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         }
       );
       history.push('/' + auth.userId + '/places');
@@ -151,7 +151,7 @@ const UpdatePlace = () => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+      {!isLoading && loadedPlace && (<form className="place-form" onSubmit={placeUpdateSubmitHandler}>
         <Input
           id="title"
           element="input"
@@ -176,7 +176,7 @@ const UpdatePlace = () => {
         <Button type="submit" disabled={!formState.isValid}>
           UPDATE PLACE
         </Button>
-      </form>
+      </form>)}
     </React.Fragment>
   );
 };
