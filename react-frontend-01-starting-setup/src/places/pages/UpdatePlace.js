@@ -55,11 +55,11 @@ const UpdatePlace = () => {
     {
       title: {
         value: "",
-        isValid: false,
+        isValid: false
       },
       description: {
         value: "",
-        isValid: false,
+        isValid: false
       },
     },
     false
@@ -78,11 +78,11 @@ const UpdatePlace = () => {
           {
             title: {
               value: responseData.place.title,
-              isValid: true,
+              isValid: true
             },
             description: {
               value: responseData.place.description,
-              isValid: true,
+              isValid: true
             },
           },
           true
@@ -120,7 +120,7 @@ const UpdatePlace = () => {
         "PATCH",
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value,
+          description: formState.inputs.description.value
         }),
         {
           "Content-Type": "application/json",
@@ -130,20 +130,20 @@ const UpdatePlace = () => {
     } catch (err) {}
   };
 
+  if (isLoading) {
+    return (
+      <div className="center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   if (!loadedPlace && !error) {
     return (
       <div className="center">
         <Card>
           <h2>Could not find place!</h2>
         </Card>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <div className="center">
-        <LoadingSpinner />
       </div>
     );
   }
