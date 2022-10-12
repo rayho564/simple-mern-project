@@ -54,11 +54,11 @@ const UpdatePlace = () => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
-        value: "",
+        value: '',
         isValid: false
       },
       description: {
-        value: "",
+        value: '',
         isValid: false
       }
     },
@@ -90,7 +90,7 @@ const UpdatePlace = () => {
       } catch (err) {}
     };
     fetchPlace();
-  }, [setFormData, placeId, sendRequest]);
+  }, [sendRequest, setFormData, placeId]);
 
   // useEffect(() => {
   //   if (identifiedPlace) {
@@ -112,7 +112,7 @@ const UpdatePlace = () => {
   //   setIsLoading(false);
   // }, [setFormData, identifiedPlace]);
 
-  const placeUpdateSubmitHandler = async (event) => {
+  const placeUpdateSubmitHandler = async event => {
     event.preventDefault();
     try {
       await sendRequest(
