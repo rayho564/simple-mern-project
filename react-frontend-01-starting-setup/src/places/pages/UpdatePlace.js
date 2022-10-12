@@ -60,7 +60,7 @@ const UpdatePlace = () => {
       description: {
         value: "",
         isValid: false
-      },
+      }
     },
     false
   );
@@ -73,17 +73,17 @@ const UpdatePlace = () => {
         const responseData = await sendRequest(
           `http://localhost:5000/api/places/${placeId}`
         );
-        setLoadedPlace(responseData.place);
+        setLoadedPlace(responseData.places);
         setFormData(
           {
             title: {
-              value: responseData.place.title,
+              value: responseData.places.title,
               isValid: true
             },
             description: {
-              value: responseData.place.description,
+              value: responseData.places.description,
               isValid: true
-            },
+            }
           },
           true
         );
@@ -123,7 +123,7 @@ const UpdatePlace = () => {
           description: formState.inputs.description.value
         }),
         {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         }
       );
       history.push('/' + auth.userId + '/places');
