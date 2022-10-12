@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import Input from "../../shared/components/FormElements/Input";
 import {
@@ -36,6 +37,8 @@ const NewPlace = () => {
     false
   );
 
+  const history = useHistory();
+
   const placeSubmitHandler = async (event) => {
     event.preventDefault();
     try {
@@ -50,7 +53,8 @@ const NewPlace = () => {
         }),
         { 'Content-Type': 'application/json' }
       );
-      // Redirect the user to a different page
+      // Allows the user to go back after the navigation
+      history.push('/');
     } catch (err) {}
   };
 
