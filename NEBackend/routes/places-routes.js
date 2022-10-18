@@ -2,6 +2,7 @@ const express = require("express");
 const { check } = require("express-validator"); // this works the same as const router = express.Router(); combined above
 
 const placesControllers = require("../controllers/places-controllers");
+const fileUpload = require('../middleware/file-upload');
 
 // Gives a special object that has more middleware and can be exported
 const router = express.Router();
@@ -15,6 +16,7 @@ router.get("/user/:uid", placesControllers.getPlacesByUserId);
 // URLs will only trigger gets, so the path we don't have to worry about conflicting above
 router.post(
   "/",
+  fileUpload.single('image'),
   [
     check("title").not().isEmpty(),
     check("description").isLength({ min: 5 }),

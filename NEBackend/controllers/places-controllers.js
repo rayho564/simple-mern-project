@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 //const { v4: uuid } = require("uuid"); // V4 includes a timestamp. Commented out as mongoose provides this
 const { validationResult } = require("express-validator");
 
@@ -134,8 +136,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image:
-      "https://media.istockphoto.com/photos/new-york-city-skyline-picture-id486334510?k=20&m=486334510&s=612x612&w=0&h=OsShL4aTYo7udJodSNXoU_3anIdIG57WyIGuwW2_tvA=",
+    image: req.file.path,
     creator
   });
 
@@ -255,6 +256,8 @@ const deletePlaceById = async (req, res, next) => {
     return next(error);
   }
 
+  const imagePath = place.image;
+
   try {
 
     const sess = await mongoose.startSession();
@@ -265,8 +268,7 @@ const deletePlaceById = async (req, res, next) => {
     // place was populated with creator
     // place refs to creators which has places object and we're removing place
     place.creator.places.pull(place);
-    await place.creator.save({session: sess})
-
+    await place.creator.save({session: sess});
     await sess.commitTransaction();
   } catch (err) {
     const error = new HttpError(
@@ -275,6 +277,10 @@ const deletePlaceById = async (req, res, next) => {
     );
     return next(error);
   }
+
+  fs.unlink(imagePath, err => {
+    console.log(err);
+  });
 
   // 200 is normal succcess
   res.status(200).json({ message: "Deleted place." });
