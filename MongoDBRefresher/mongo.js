@@ -1,11 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/?retryWrites=true&w=majority";
+const url = "";
 
 
 //const { MongoClient, ServerApiVersion } = require("mongodb");
 
-//const uri = "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/?retryWrites=true&w=majority";
+//const uri = "";
 
 const createProduct = async (req, res, next) => {
   const newProduct = {
