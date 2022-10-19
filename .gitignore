@@ -74,3 +74,6 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+NEBackend/app.js
+react-frontend-01-starting-setup/public/index.html
