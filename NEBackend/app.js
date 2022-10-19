@@ -59,7 +59,7 @@ app.use((error, req, res, next) => {
 // We're going to default the db to mern which is inbetween the / and ?
 mongoose
   .connect(
-    "mongodb+srv://sa2:passwordpass@cluster0.xvwejqs.mongodb.net/mern?retryWrites=true&w=majority"
+    ""
   )
   .then(() => {
     app.listen(5000);
